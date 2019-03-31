@@ -1,0 +1,48 @@
+<div style="width:80%;margin:auto;">
+    <div (mouseover)="startClearLoopNotification('over')" (mouseleave)="startClearLoopNotification('leave')" >
+        <div  class="box">
+          <table>
+            <tr>
+              <th class="bell-icon">
+                <div class="notification-message">{{notificationMessage.length}}</div>
+                <i class="material-icons" style="color:red;padding:0px;font-size:24px;"> notifications</i>
+              </th>
+              <th #notificationBlock class="txt" [class.text]="slideIndex" (click)="showHideSlider()">
+                <div class="mySlides">
+                  <div class="catcha c" style="display:inline;" [innerHTML]="isShortNotification(notificationMessage[currentIndex].text)"></div> 
+                  <span>&nbsp;{{isReadMe(notificationMessage[currentIndex].text)}}</span>
+                </div>
+              </th>
+            </tr>
+          </table>
+        </div>
+    </div>
+    <div *ngIf="!notificationWithoutSlider;">
+      <div class="slider-blackscreen" (click)="closeSlider()"></div>
+      <div class="notification-list">
+        <div class="cross" (click)="closeSlider()">
+        </div>
+        <div class="a" style="margin-bottom:30px;">
+            <div class="b">
+                <i class="material-icons" style="color:red;padding:0px;font-size:24px;">notifications</i>
+            </div>
+            <div class="c catcha" [innerHTML]="notificationMessage[currentIndex].text">
+            </div>
+        </div>
+        <div class="a slider-notification-number">{{notificationMessage.length>1?otherNotifications:undefined}} {{notificationMessage.length>1?"("+(notificationMessage.length-1)+")":undefined}}</div>
+        <div *ngFor="let obj of removeCurrentNotification();" class="a">
+            <div class="b">
+                <i class="material-icons" style="color:red;padding:0px;font-size:24px;">notifications</i>
+            </div>
+            <div class="c catcha" [innerHTML]="obj.text">
+            </div>
+        </div>
+      </div>
+    </div>
+</div> 
+
+ 
+
+
+
+
